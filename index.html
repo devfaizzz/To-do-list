@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List -  Plan your Life!</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+        <link rel="stylesheet" href="main.js">
+        <script>
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const taskInput = document.querySelector(".main form input");
+                const addTaskButton = document.querySelector(".task input");
+                const mainContainer = document.querySelector(".main");
+            
+                const taskListContainer = document.createElement("div");
+                taskListContainer.classList.add("task-list");
+                taskListContainer.style.marginTop = "10px";
+                taskListContainer.style.padding = "10px";
+                taskListContainer.style.fontFamily = "Poppins, serif";
+            
+                mainContainer.appendChild(taskListContainer);
+            
+                const addTask = () => {
+                    const taskValue = taskInput.value.trim();
+            
+                    if (taskValue === "") {
+                        alert("Please enter a task.");
+                        return;
+                    }
+            
+                    const taskElement = document.createElement("div");
+                    taskElement.style.display = "flex";
+                    taskElement.style.justifyContent = "space-between";
+                    taskElement.style.marginBottom = "10px";
+                    taskElement.style.border = "1px solid black";
+                    taskElement.style.padding = "10px";
+                    taskElement.style.borderRadius = "4px";
+                    taskElement.style.backgroundColor = "#f9f9f9";
+            
+                    const taskText = document.createElement("span");
+                    taskText.textContent = taskValue;
+                    taskText.style.flexGrow = "1";
+            
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.style.backgroundColor = "rgb(213, 159, 213)";
+                    deleteButton.style.border = "none";
+                    deleteButton.style.borderRadius = "4px";
+                    deleteButton.style.padding = "5px 10px";
+                    deleteButton.style.cursor = "pointer";
+                    deleteButton.style.color = "white";
+                    deleteButton.style.fontFamily = "Poppins, serif";
+            
+                    deleteButton.addEventListener("click", () => {
+                        taskListContainer.removeChild(taskElement);
+                    });
+            
+                    taskElement.appendChild(taskText);
+                    taskElement.appendChild(deleteButton);
+            
+                    taskListContainer.appendChild(taskElement);
+            
+                    taskInput.value = "";
+                };
+            
+                
+                addTaskButton.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    addTask();
+                });
+            
+                taskInput.addEventListener("keypress", (e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        addTask();
+                    }
+                });
+            });
+            </script>
+</head>
+<body>
+    <header>
+        <div class="head">
+            <h1>Task Planner</h1>
+        </div>
+    </header>
+    <main>
+        <div class="main">
+            <form action="#">
+                <input type="text" placeholder="What are you planning for?" class="task-input">
+            </form>
+        </div>
+        <div class="task">
+            <input type="submit" value="+ ADD TASK" class="add-task-btn"> 
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <p>Made with ♥ by Faiz <3</p>
+        </div>
+    </footer>
+</body>
+</html>
